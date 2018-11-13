@@ -1,0 +1,147 @@
+from django import forms
+
+from .models import Departure, DetailPurchase, Inventory
+
+
+class DetailPurchaseForm(forms.ModelForm):
+    class Meta:
+        model = DetailPurchase
+        fields = ['id_detail',
+                  'id_product',
+                  'brand',
+                  'id_provider',
+                  'quantity',
+                  'date_buy',
+                  'date_expiration',
+                  'cost',
+                  'value_sale'
+        ]
+        labels = {
+            'id_detail': 'ID',
+            'id_product': 'Nombre de Producto',
+            'brand': 'Marca',
+            'id_provider': 'Id Proveedor',
+            'quantity': 'Cantidad',
+            'date_buy': 'Fecha de Compra',
+            'date_expiration': 'Fecha de Vencimiento',
+            'cost': 'Cost',
+            'value_sale': 'Precio de Venta'
+        }
+
+        widgets = {
+            'id_detail': forms.TextInput(attrs={'class':'form-control'}),
+            'id_product': forms.Select(attrs={'class':'form-control'}),
+            'brand': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Marca del Producto'}),
+            'id_provider': forms.Select(attrs={'class':'form-control'}),
+            'quantity': forms.NumberInput(attrs={'class': 'from-control', 'style': 'width:35%', }),
+            'date_buy': forms.DateInput(attrs={'class':'from-control', 'type':'date', 'style':'width:35%', }),
+            'date_expiration': forms.DateInput(attrs={'class':'from-control', 'type':'date', 'style':'width:35%', }),
+            'cost': forms.NumberInput(attrs={'class': 'from-control', 'style': 'width:35%', }),
+            'value_sale': forms.NumberInput(attrs={'class': 'from-control', 'style': 'width:35%', })
+        }
+
+    def save(self, commit=True):
+        objecto = super(DetailPurchaseForm, self).save(commit=False)
+        objecto.update_detailpurchase(self.id_product, self.quantity, self.brand)
+        if commit:
+            objecto.save()
+        return objecto
+
+
+
+class DepartureForm(forms.ModelForm):
+    class Meta:
+        model = Departure
+        fields = [
+            'id_detail',
+            'nom_product',
+            'brand',
+            'quantity',
+            'total'
+        ]
+
+        labels = {
+            'id_detail': 'Producto y Marca',
+            'nom_product': 'Nombre de Producto',
+            'brand': 'Marca',
+            'quantity': 'Cantidad',
+            'total': 'Total Salida'
+        }
+
+        widgets = {
+            'id_departure': forms.TextInput(attrs={'class':'form-control'}),
+            'id_detail': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Producto y Marca'}),
+            'nom_product': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre del Producto'}),
+            'brand': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Marca del Producto'}),
+            'quantity': forms.NumberInput(attrs={'class': 'from-control', 'style': 'width:35%',}),
+            'total' : forms.NumberInput(attrs={'class': 'from-control', 'style': 'width:35%',})
+        }
+
+    def get_value_sale(self):
+        return self.id_detail.value_sale
+
+    def get_id_product(self):
+        return self.id_detail.id_product
+
+    def get_nom_product(self):
+        return self.id_detail.id_product.name_product
+
+    def save(self, commit=True):
+        id_pro = self.id_detail.id_product
+        item = Inventory.objects.filter(id_product=id_pro)
+        if len(item) > 0:
+            item = item[0]
+            if item.quantity >= self.quantity:
+                self.nom_product = self.id_detail.id_product.name_product
+                self.total = self.quantity * self.id_detail.value_sale
+        objecto = super(DepartureForm, self).save(commit=False)  # Call the "real" save() method.
+            #Inventory.update_departure(self.id_detail.id_product, self.quantity)
+        if commit:
+            objecto.save()
+        return objecto
+
+
+class InventoryForm(forms.ModelForm):
+    class Meta:
+        model = Inventory
+        fields = [
+            'id_product',
+            'brand',
+            'quantity'
+        ]
+
+        labels = {
+            'id_product': 'Nombre de Producto',
+            'brand': 'Marca',
+            'quantity': 'Cantidad'
+        }
+
+        widgets = {
+            'id_product': forms.Select(attrs={'class':'form-control', 'placeholder': 'Producto y Marca'}),
+            'brand': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Marca del Producto'}),
+            'quantity': forms.NumberInput(attrs={'class': 'from-control', 'style': 'width:35%',})
+        }
+
+    def update_departure(id_pro, quantity_departure):
+        item = Inventory.objects.filter(id_product=id_pro.pk)
+        if len(item) > 0:
+            item = item[0]
+            item.quantity -= quantity_departure
+
+        """else:
+            item = Inventory()
+            item.id_product = id_pro
+            item.quantity = 0"""
+        Inventory.save(item)
+
+    def update_detailpurchase(id_pro, quantity_detailpurchase, brand):
+        item = Inventory.objects.filter(id_product=id_pro.pk)
+        if len(item) > 0:
+            item = item[0]
+            item.quantity += quantity_detailpurchase
+        else:
+            item = Inventory()
+            item.id_product = id_pro
+            item.quantity = quantity_detailpurchase
+        item.brand = brand
+        Inventory.save(item)

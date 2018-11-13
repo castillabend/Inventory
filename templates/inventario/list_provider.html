@@ -1,0 +1,56 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Proveedores</title>
+
+
+</head>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">Nit</th>
+        <th scope="col">Nombre Proveedor</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Contacto</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Celular</th>
+        <th scope="col">Email</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Nivel</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% if object_list %}
+    {% for prov in object_list %}
+    <tr>
+
+        <td>{{prov.nit_provider}} </td>
+        <td>{{prov.name_provider}} </td>
+        <td>{{prov.address}} </td>
+        <td>{{prov.contact}} </td>
+        <td>{{prov.phone}} </td>
+        <td>{{prov.cell_phone}} </td>
+        <td>{{prov.email}} </td>
+        <td>{{prov.category}} </td>
+        <td>{{prov.level}} </td>
+        <td>
+				<a class="btn btn-primary" href="#">Editar</a>
+				<a class="btn btn-danger" href="#">Eliminar</a>
+        </td>
+
+
+
+    </tr>
+    {% endfor %}
+    {% else %}
+		<h1>No hay registros de productos</h1>
+    {% endif %}
+    </table>
+
+</body>
+</html>
+{% endblock %}

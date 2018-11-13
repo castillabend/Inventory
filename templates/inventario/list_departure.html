@@ -1,0 +1,52 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Salidas</title>
+
+
+</head>
+<table class="table table-bordered">
+    <thead>
+
+
+    <tr>
+{#        <th scope="col">Nit</th>#}
+        <th scope="col">Nombre Producto</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Total</th>
+        <th scope="col">Fecha</th>
+{#        <th scope="col">Costo</th>#}
+{#        <th scope="col">Precio Venta</th>#}
+    </tr>
+    </thead>>
+<tbody>
+    {% if object_list %}
+    {% for dep in object_list %}
+    <tr>
+
+        <td>{{dep.nom_product}} </td>
+        <td>{{dep.id_brand}} </td>
+        <td>{{dep.quantity}} </td>
+        <td>{{dep.total}} </td>
+        <td>{{dep.date_dep}} </td>
+        <td>
+				<a class="btn btn-primary" href="#">Editar</a>
+				<a class="btn btn-danger" href="#">Eliminar</a>
+        </td>
+
+
+
+    </tr>
+    {% endfor %}
+    {% else %}
+		<h1>No hay registros de salidas</h1>
+    {% endif %}
+
+</tbody>
+</table>
+</html>
+{% endblock %}

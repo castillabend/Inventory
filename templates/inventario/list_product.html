@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Productos</title>
+
+
+</head>
+
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">#ID</th>
+        <th scope="col">Nombre Producto</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Serial</th>
+        <th scope="col">Descripcion</th>
+{#        <th scope="col">Editar</th>#}
+{#        <th scope="col">Eliminar</th>#}
+    </tr>
+    </thead>
+    <tbody>
+    {% if object_list %}
+    {% for prod in object_list %}
+    <tr>
+
+        <td>{{prod.id_product}} </td>
+        <td>{{prod.name_product}} </td>
+        <td>{{prod.category}} </td>
+        <td>{{prod.serial}} </td>
+        <td>{{prod.description}} </td>
+{#        <td>#}
+{#            <a href="{% url 'inventario:update_product' lib.id %}"> <span>Editar</span></a>#}
+{#            <a href="{% url 'inventario: delete_product' lib.id %}"><span>Eliminar</span></a>#}
+{#        </td>#}
+
+    </tr>
+    {% endfor %}
+     {% else %}
+		<h1>No hay registros de productos</h1>
+    {% endif %}
+    <tbody>
+    </table>
+
+
+</html>
+{% endblock %}

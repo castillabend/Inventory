@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Compras</title>
+
+
+</head>
+<body>
+
+    <table>
+    <tr>
+{#        <th scope="col">Nit</th>#}
+        <th scope="col">Nombre Producto</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Nombre Proveedor</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Fecha Compra</th>
+        <th scope="col">Fecha Expiracion</th>
+        <th scope="col">Costo</th>
+        <th scope="col">Precio Venta</th>
+{#        <th scope="col">Categoria</th>#}
+{#        <th scope="col">Nivel</th>#}
+
+    </tr>
+    {% if object_list %}
+    {% for purc in object_list %}
+    <tr>
+
+        <td>{{purc.id_product}} </td>
+        <td>{{purc.id_brand}} </td>
+        <td>{{purc.nit_provider}} </td>
+        <td>{{purc.quantity}} </td>
+        <td>{{purc.date_buy}} </td>
+        <td>{{purc.date_expiration}} </td>
+        <td>{{purc.cost}} </td>
+        <td>{{purc.value_sale}} </td>
+
+
+
+    </tr>
+    {% endfor %}
+    {% endif %}
+    </table>
+
+</body>
+</html>

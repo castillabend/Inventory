@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Inventario</title>
+
+
+</head>
+
+
+<table class="table table-bordered">
+    <thead>
+     <tr>
+        <th scope="col">Nombre Producto</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Cantidad</th>
+
+     </tr>
+    </thead>
+ <tbody>
+    {% if object_list %}
+    {% for inv in object_list %}
+    <tr>
+
+        <td>{{inv.id_product}} </td>
+        <td>{{inv.id_brand}} </td>
+        <td>{{inv.quantity}} </td>
+
+
+
+    </tr>
+    {% endfor %}
+    {% else %}
+		<h1>No hay registros de inventario</h1>
+    {% endif %}
+
+
+
+ </tbody>
+</table>
+</html>
+{% endblock%}
+
+

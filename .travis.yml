@@ -1,0 +1,7 @@
+Language: python
+python:
+    - "3.6"
+  script:
+    - pytest
+
+Jdk: oraclejdk8

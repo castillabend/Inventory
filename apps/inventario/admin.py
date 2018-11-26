@@ -12,6 +12,7 @@ from .forms import DepartureForm, PurchaseForm, InventoryForm
 class AdminProduct(admin.ModelAdmin):
     list_display = ['id_product', 'name_product', 'category', 'description']
 
+
 @admin.register(Brand)
 class AdminBrand(admin.ModelAdmin):
     list_display = ['id_brand', 'name_brand']
@@ -20,7 +21,6 @@ class AdminBrand(admin.ModelAdmin):
 @admin.register(Provider)
 class AdminProvider(admin.ModelAdmin):
     list_display = ['nit_provider', 'name_provider', 'address', 'category', 'level']
-
 
 
 @admin.register(Purchase)

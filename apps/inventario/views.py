@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from apps.inventario.forms import PurchaseForm, DepartureForm
+from apps.inventario.forms import PurchaseForm, DepartureForm, ProductForm, ProviderForm
 from apps.inventario.models import Product, Provider, Inventory, Purchase, Departure
 
 

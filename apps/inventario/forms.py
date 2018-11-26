@@ -22,7 +22,7 @@ class ProductForm(forms.ModelForm):
 
         widgets = {
             'name_product': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre del Producto'}),
-            'category': forms.ChoiceField(attrs={'class': 'form-control', 'placeholder': 'Categoria'}),
+            'category': forms.ChoiceField(),
             'serial': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Serial'}),
             'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Descripcion'}),
         }
@@ -62,9 +62,9 @@ class ProviderForm(forms.ModelForm):
             'contact': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Contacto'}),
             'phone': forms.NumberInput(attrs={'class': 'from-control', 'style': 'width:35%', 'placeholder': 'Numero Fijo'}),
             'cell_phone': forms.NumberInput(attrs={'class': 'from-control', 'style': 'width:35%', 'placeholder': 'Numero Celular'}),
-            'email': forms.EmailField(attrs={'class': 'from-control', 'style': 'width:35%', 'placeholder': 'Dirección de correo'}),
-            'category': forms.ChoiceField(attrs={'class': 'form-control', 'placeholder': 'Categoria'}),
-            'level': forms.ChoiceField(attrs={'class': 'form-control', 'placeholder': 'Nivel'})
+            'email': forms.TextInput(),
+            'category': forms.ChoiceField(),
+            'level': forms.ChoiceField()
         }
 
 

@@ -46,7 +46,7 @@ class ProviderForm(forms.ModelForm):
         labels = {
             'nit_provider': 'NIT',
             'name_provider': 'Nombre Proveedor',
-            'address': 'Dirección',
+            'address': 'Direccion',
             'contact': 'Contacto',
             'phone': 'Telefono',
             'cell_phone': 'Celular',

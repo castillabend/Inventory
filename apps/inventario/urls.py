@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from apps.inventario.views import ListPurchase, CreatePurchase,  DeletePurchase, \
+from .views import ListPurchase, CreatePurchase,  DeletePurchase, \
     ListDeparture, CreateDeparture, DeleteDeparture, ListProduct, ListProvider, ListInventory #UpdatePurchase, UpdateDeparture,
 
 urlpatterns = [

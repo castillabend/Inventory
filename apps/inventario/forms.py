@@ -58,7 +58,7 @@ class ProviderForm(forms.ModelForm):
         widgets = {
             'nit_provider': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nit Proveedor'}),
             'name_provider': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre del Proveedor'}),
-            'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Dirección'}),
+            'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Direccion'}),
             'contact': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Contacto'}),
             'phone': forms.NumberInput(attrs={'class': 'from-control', 'style': 'width:35%', 'placeholder': 'Numero Fijo'}),
             'cell_phone': forms.NumberInput(attrs={'class': 'from-control', 'style': 'width:35%', 'placeholder': 'Numero Celular'}),

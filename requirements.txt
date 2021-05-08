@@ -17,7 +17,7 @@ djangorestframework==3.8.2
 dnspython==1.15.0
 ephem==3.7.6.0
 et-xmlfile==1.0.1
-eventlet==0.24.1
+eventlet==0.31.0
 greenlet==0.4.15
 idna==2.7
 inflection==0.3.1

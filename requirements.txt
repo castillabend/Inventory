@@ -8,7 +8,7 @@ cffi==1.11.5
 chardet==3.0.4
 curtsies==0.3.0
 Django==1.11.16
-django-celery-results==1.0.1
+django-celery-results==2.4.0
 django-cors-headers==2.4.0
 django-crispy-forms==1.7.2
 django-model-changes-py3==0.15.1
